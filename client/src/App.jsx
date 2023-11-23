@@ -5,6 +5,7 @@ import "./App.css";
 import LandingPage from "./components/LandingPage/LandingPage";
 import HomePage from "./components/HomePage/HomePage";
 import Detail from "./components/Detail";
+import Activities from "./components/Activities/Activities";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -23,6 +24,21 @@ function App() {
     }
   };
   
+  const createActivity = (activityData) => {
+    activityData.difficulty = Number(activityData.difficulty)
+    activityData.duration = Number(activityData.duration)
+    axios.post("http://localhost:3001/activities", activityData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   return (
     <div>
@@ -33,6 +49,7 @@ function App() {
           element={<HomePage onSearch={onSearch} countries={countries} />}
         />
         <Route path="/detail/:ID" element={<Detail />} />
+        <Route path="/activities" element={<Activities createActivity={createActivity}/>}/>
       </Routes>
     </div>
   );

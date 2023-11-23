@@ -2,15 +2,14 @@ const { Activity } = require("../db");
 
 const postActivities = async (req, res) => {
   try {
-    const { ID, name, dificulty, duration, season } = req.body;
+    const { name, difficulty, duration, season } = req.body;
 
-    if (!ID || !name || !season) {
+    if (!name || !season) {
       return res.status(403).send("Missing Data");
     } else {
       const activity = await Activity.create({
-        ID,
         name,
-        dificulty,
+        difficulty,
         duration,
         season,
       });
