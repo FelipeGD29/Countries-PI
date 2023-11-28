@@ -20,6 +20,7 @@ conn
         subregion: countryData.subregion,
         area: countryData.area.toString(),
         population: countryData.population.toString(),
+        activities: []
       });
     });
 

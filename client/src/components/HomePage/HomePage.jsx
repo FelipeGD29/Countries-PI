@@ -1,15 +1,12 @@
-import SearchBar from "../SearchBar";
-import Cards from "../Cards"
-import style from "./HomePage.module.css"
-import { Link } from "react-router-dom";
-const HomePage = (props) => {
+import SearchBar from "../SearchBar/SearchBar";
+import Cards from "../Cards/Cards";
+import style from "./HomePage.module.css";
+
+const HomePage = () => {
   return (
     <div className={style.content}>
-      <Link to="/activities">
-      <button>Activities</button>
-      </Link>
-      <SearchBar onSearch={props.onSearch}/>
-      <Cards countries={props.countries}/>
+      <SearchBar />
+      <Cards />
     </div>
   );
 };
