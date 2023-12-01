@@ -17,6 +17,11 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  let orderedCountriesByContinent = [...state.countries];
+  let orderedCountriesByPopulation = [...state.countries];
+  let contientCountries = state.allCountries.filter(
+    (country) => country.continent === action.payload
+  );
   switch (action.type) {
     case GET_COUNTRIES:
       return {
@@ -50,7 +55,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case ORDER_ALPHABETICALLY:
-      let orderedCountriesByContinent = [...state.countries];
       if (action.payload === "A") {
         orderedCountriesByContinent.sort((a, b) => {
           if (a.name > b.name) return 1;
@@ -71,7 +75,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case ORDER_POPULATION:
-      let orderedCountriesByPopulation = [...state.countries];
       if (action.payload === "A") {
         orderedCountriesByPopulation.sort((a, b) => {
           if (a.population > b.population) return 1;
@@ -80,8 +83,8 @@ const reducer = (state = initialState, action) => {
         });
       } else if (action.payload === "D") {
         orderedCountriesByPopulation.sort((a, b) => {
-          if (a.population < b.population) return 1;
-          else if (a.population > b.population) return -1;
+          if (Number(a.population) < Number(b.population)) return 1;
+          else if (Number(a.population) >Number( b.population)) return -1;
           else return 0;
         });
       }
@@ -92,9 +95,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_CONTINENT:
-      let contientCountries = state.allCountries.filter(
-        (country) => country.continent === action.payload
-      );
       return {
         ...state,
         countries: contientCountries,

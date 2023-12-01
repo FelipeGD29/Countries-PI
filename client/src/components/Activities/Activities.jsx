@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import validation from "./validation";
 import { useDispatch, useSelector } from "react-redux";
 import { createActivity } from "../../redux/actions/actions";
+import AllActivities from "./AllActivities";
 import style from "./Activities.module.css";
 
 const Activities = () => {
@@ -11,74 +12,98 @@ const Activities = () => {
     difficulty: "",
     duration: "",
     season: "",
-    CountryID: "",
+    CountryID: [],
   });
+
   const [difficultyData, setDifficultyData] = useState("");
   const [seasonData, setSeasonData] = useState("");
-  const [countryID, setCountryID] = useState("");
   const countries = useSelector((state) => state.countries);
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (event, option) => {
     let { name, value } = event.target;
-    setActivityData({
-      ...activityData,
-      [name]: value,
-    });
-    if (option === "difficulty") {
-      setDifficultyData(value);
-    } else if (option === "season") {
-      setSeasonData(value);
-    } else if (option === "country") {
-      setCountryID(value);
+
+    if (option === "country") {
+      const selectedCountries = Array.from(
+        event.target.selectedOptions,
+        (option) => option.value
+      );
+      setActivityData({
+        ...activityData,
+        CountryID: [...activityData.CountryID, selectedCountries],
+      });
+    } else {
+      setActivityData({
+        ...activityData,
+        [name]: value,
+      });
+      if (option === "difficulty") {
+        setDifficultyData(value);
+      } else if (option === "season") {
+        setSeasonData(value);
+      }
     }
+  };
+
+  const handleRemoveCountry = (countryID) => {
+    const updatedCountries = activityData.CountryID.filter(
+      (ID) => ID !== countryID
+    );
+    return () => {
+      setActivityData({
+        ...activityData,
+        CountryID: updatedCountries,
+      });
+    };
   };
 
   useEffect(() => {
     setErrors(validation(activityData));
+    console.log(activityData);
   }, [activityData]);
 
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
-    event.preventDefault();
     setActivityData({
       ...activityData,
       difficulty: difficultyData,
       season: seasonData,
-      CountryID: countryID,
     });
     if (
       activityData.name !== "" &&
       activityData.difficulty !== "" &&
       activityData.duration !== "" &&
       activityData.season !== "" &&
-      activityData.CountryID !== ""
-    ) {
-      dispatch(createActivity(activityData));
-      alert("Activity created SUCCESSFULLY");
-      setActivityData({
-        name: "",
-        difficulty: "",
-        duration: "",
-        season: "",
-        CountryID: "",
-      });
-    } else alert("Complete all areas");
+      activityData.CountryID.length !== 0
+      ) {
+        dispatch(createActivity(activityData));
+        alert("Activity created SUCCESSFULLY");
+        setActivityData({
+          name: "",
+          difficulty: "",
+          duration: "",
+          season: "",
+          CountryID: [],
+        });
+      } else {
+        alert("Complete all areas");
+        event.preventDefault();
+      } 
   };
 
   return (
     <div className={style.content}>
       <div className={style.homeBtn}>
-      <Link to="/home">
-        <button className={style.button}>Home</button>
-      </Link>
+        <Link to="/home">
+          <button>Home</button>
+        </Link>
       </div>
 
       <form onSubmit={handleSubmit} className={style.form}>
         <label>Name</label>
         <input
-        className={style.input}
+          className={style.input}
           type="text"
           name="name"
           value={activityData.name}
@@ -90,7 +115,7 @@ const Activities = () => {
 
         <label>Difficulty</label>
         <select
-        className={style.select}
+          className={style.select}
           name="difficulty"
           id="difficulty"
           value={difficultyData}
@@ -108,7 +133,7 @@ const Activities = () => {
 
         <label>Duration</label>
         <input
-        className={style.input}
+          className={style.input}
           type="text"
           name="duration"
           value={activityData.duration}
@@ -120,7 +145,7 @@ const Activities = () => {
 
         <label>Season</label>
         <select
-        className={style.select}
+          className={style.select}
           name="season"
           id="season"
           value={seasonData}
@@ -137,7 +162,7 @@ const Activities = () => {
 
         <label>Country</label>
         <select
-        className={style.select}
+          className={style.select}
           name="CountryID"
           id="CountryID"
           onChange={(event) => handleChange(event, "country")}
@@ -149,8 +174,20 @@ const Activities = () => {
           ))}
         </select>
 
-        <button type="submit" className={style.button}>Submit</button>
+        {activityData.CountryID.map((country) => (
+          <div key={country} className={style.countriesAdded}>
+            <input
+              type="checkbox"
+              onClick={handleRemoveCountry(country)}
+              className={style.checkbox}
+            />
+            <p>{country}</p>
+          </div>
+        ))}
+
+        <button type="submit">Submit</button>
       </form>
+      <AllActivities/>
     </div>
   );
 };

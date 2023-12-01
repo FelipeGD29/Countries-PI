@@ -12,13 +12,17 @@ import style from "./SearchBar.module.css";
 
 const SearchBar = () => {
   const [name, setName] = useState("");
-  const [previousName, setPreviousName] = useState([]);
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
-    setPreviousName(...previousName, event.target.value);
     setName(event.target.value);
   };
 
-  const dispatch = useDispatch();
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      onSearch();
+    }
+  };
 
   const onSearch = () => {
     dispatch(getName(name));
@@ -47,28 +51,25 @@ const SearchBar = () => {
   return (
     <div className={style.container}>
       <Link to="/activities">
-        <button className={style.button}>Activities</button>
+        <button>Activities</button>
       </Link>
       <div className={style.searchBar}>
         <input
           type="search"
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           value={name}
           placeholder="Enter a country name"
           autoComplete="off"
           className={style.input}
         />
-        <button onClick={onSearch} className={style.button}>
-          Search
-        </button>
-        <button onClick={showAllCountries} className={style.button}>
-          Show All
-        </button>
+        <button onClick={onSearch}>Search</button>
+        <button onClick={showAllCountries}>Show All</button>
       </div>
       <div>
         <label>Alphabetically</label>
         <select
-        className={style.select}
+          className={style.select}
           name="orderAlphabetically"
           id="orderAlphabetically"
           onChange={handleOrder}
@@ -79,21 +80,21 @@ const SearchBar = () => {
 
         <label>Population</label>
         <select
-        className={style.select}
-        name="orderPopulation"
-        id="orderPopulation"
-        onChange={handleOrder}
+          className={style.select}
+          name="orderPopulation"
+          id="orderPopulation"
+          onChange={handleOrder}
         >
           <option value="A">Ascendent</option>
           <option value="D">Descendent</option>
         </select>
 
-        <label>Filter by Continent</label>
+        <label>Continent</label>
         <select
-        className={style.select}
-        name="continent"
-        id="continent"
-        onChange={handleContinent}
+          className={style.select}
+          name="continent"
+          id="continent"
+          onChange={handleContinent}
         >
           <option value="All">All</option>
           <option value="North America">North America</option>
@@ -101,7 +102,7 @@ const SearchBar = () => {
           <option value="Europe">Europe</option>
           <option value="Asia">Asia</option>
           <option value="Oceania">Oceania</option>
-          <option value="Antartica">Antartica</option>
+          <option value="Antarctica">Antarctica</option>
         </select>
       </div>
     </div>

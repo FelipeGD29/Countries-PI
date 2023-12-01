@@ -12,6 +12,7 @@ const Cards = () => {
       setCurrentPage(currentPage);
     } else setCurrentPage(currentPage + 10);
   };
+
   let prevPage = () => {
     if (currentPage < 9) {
       setCurrentPage(0);
@@ -26,7 +27,6 @@ const Cards = () => {
 
   const lastPage = () => {
     setCurrentPage(countries.length - 10);
-    console.log(currentPage);
   };
 
   useEffect(() => {

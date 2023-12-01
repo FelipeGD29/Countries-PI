@@ -23,6 +23,7 @@ export const getDetail = (id) => {
     dispatch({ type: GET_DETAIL, payload: data });
   };
 };
+
 export const getName = (name) => {
   return async (dispatch) => {
     try {
@@ -87,3 +88,4 @@ export const filterContinent = (contient) => {
     payload: contient,
   };
 };
+

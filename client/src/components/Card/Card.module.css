@@ -16,9 +16,7 @@
 .flag {
     width: 320px;
     height: 213px; 
-    object-fit: cover;
     border-radius:50px;
-
 }
 .text {
     overflow: hidden;

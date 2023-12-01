@@ -15,6 +15,10 @@ const Detail = () => {
 
   return (
     <div className={style.container}>
+      <Link to="/home">
+      <button>Home</button>
+      </Link>
+
       <h1>{countryDetail.ID}</h1>
 
       <h1>Country Name: {countryDetail.name}</h1>
@@ -47,7 +51,9 @@ const Detail = () => {
         Population: {countryDetail.name} counts with a population of{" "}
         {countryDetail.population}
       </h2>
-      {countryDetail?.Activities?.length ? (
+      <Link to="/activities">
+      {
+      countryDetail?.Activities?.length ? (
         <ul>
           Activities:
           {countryDetail?.Activities?.map((activity) => (
@@ -55,10 +61,10 @@ const Detail = () => {
           ))}
         </ul>
       ) : (
-        <Link to="/activities">
           <p>Plan your activities here!</p>
+      )
+      }
         </Link>
-      )}
     </div>
   );
 };

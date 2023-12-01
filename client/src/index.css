@@ -16,13 +16,6 @@
 
 
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
 
 h1 {
   font-size: 3.2em;
@@ -34,42 +27,65 @@ button:hover {
 }
 
 */
+body {
+  font-family: "Quicksand", sans-serif;
+  color: white
+}
+
+a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
 button {
-  border-radius: 8px;
+  margin: 5px;
+  color: white;
+  border-radius: 50px;
   border: 1px solid transparent;
+  width:126px;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-image: linear-gradient(22deg, #000046 0%, #1cb5e0 100%);
   cursor: pointer;
   transition: border-color 0.25s;
+  transition: all 0.3s ease;
 }
 
-  img{
+button:hover {
+  box-shadow: 0px 0px 25px 0px rgb(190, 187, 18);
+  color: rgb(190, 187, 18);
+}
+
+img {
   width:300px;
   height:213px;
- }
- #root a ._text_gwn0a_37{
+}
+
+#root a ._text_gwn0a_37{
   width:278px;
   color: white;
- }
- 
- #root ._container_18xk7_1 a > ._text_18xk7_37{
+}
+
+#root ._container_18xk7_1 a > ._text_18xk7_37{
   width:192px;
   transform:translatex(47px) translatey(21px);
- }
+}
 h2{
   color:#ffffff;
   text-shadow:none;
- }
- 
- /* Heading */
- h3{
+}
+
+/* Heading */
+h3{
   color:#ffffff;
- }
- 
- label {
+}
+
+label {
   color:#ffffff;
- }
- 
+}
+
+ input {
+  color:#ffffff;
+}
