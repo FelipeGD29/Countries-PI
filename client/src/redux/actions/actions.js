@@ -28,7 +28,7 @@ export const getName = (name) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/search?name=${name}`
+        `http://localhost:3001/country/name?name=${name}`
       );
 
       dispatch({ type: GET_BY_NAME, payload: data });

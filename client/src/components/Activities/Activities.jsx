@@ -60,7 +60,6 @@ const Activities = () => {
 
   useEffect(() => {
     setErrors(validation(activityData));
-    console.log(activityData);
   }, [activityData]);
 
   const dispatch = useDispatch();
