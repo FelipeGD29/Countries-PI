@@ -12,9 +12,11 @@ const postActivities = async (req, res) => {
         duration,
         season,
       });
-      await activity.setCountries(CountryID);
+      await CountryID.forEach((ID) => 
+        activity.setCountries(ID)
+      )
 
-      return res.status(200).json(activity);
+      return res.status(201).json(activity);
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });

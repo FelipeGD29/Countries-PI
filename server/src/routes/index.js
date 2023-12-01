@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/countries", getCountries);
 router.get("/countries/:idPais", getCountryDetail);
-router.get("/search", searchCountryByName);
+router.get("/country/name", searchCountryByName);
 router.post("/activities", postActivities);
 router.get("/activities", getActivities);
 
