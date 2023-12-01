@@ -49,7 +49,7 @@ describe("Routing test", () => {
       expect(bodyBra.ID).toBe("BRA");
     });
 
-    it("If there is an error responds with a status: 404", async () => {
+    it("If the country ID doesn't exist responds with a status: 404", async () => {
       const { statusCode } = await agent.get("/countries/AAA");
 
       expect(statusCode).toBe(404);
@@ -72,6 +72,12 @@ describe("Routing test", () => {
       );
 
       expect(bodyUpperCase[0].name).toEqual(bodyLowerCase[0].name);
+    });
+
+    it("If the country name doesn't exist responds with a status: 404", async () => {
+      const { statusCode } = await agent.get("/country?name=777");
+
+      expect(statusCode).toBe(404);
     });
   });
 
