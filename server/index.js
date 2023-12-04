@@ -8,7 +8,6 @@ conn;
 conn
   .sync({ force: true })
   .then(() => {
-    // Carga los datos en la base de datos
     countriesData.countries.forEach((countryData) => {
       Country.create({
         ID: countryData.cca3,
@@ -23,7 +22,6 @@ conn
       });
     });
 
-    // Levanta el servidor después de cargar los datos
     server.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
     });

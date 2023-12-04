@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false, // Evita que se creen automáticamente createdAt y updatedAt
+      timestamps: false,
     }
   );
 };

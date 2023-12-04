@@ -3,7 +3,7 @@ const { Activity } = require("../db");
 const postActivities = async (req, res) => {
   try {
     const { name, difficulty, duration, season, CountryID } = req.body;
-    if (!name || !season) {
+    if (!name || !difficulty || !season) {
       return res.status(403).send("Missing Data");
     } else {
       const activity = await Activity.create({
