@@ -77,8 +77,8 @@ const reducer = (state = initialState, action) => {
     case ORDER_POPULATION:
       if (action.payload === "A") {
         orderedCountriesByPopulation.sort((a, b) => {
-          if (a.population > b.population) return 1;
-          else if (a.population < b.population) return -1;
+          if (Number(a.population) >  Number(b.population)) return 1;
+          else if (Number(a.population) <  Number(b.population)) return -1;
           else return 0;
         });
       } else if (action.payload === "D") {
