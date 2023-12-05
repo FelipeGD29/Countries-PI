@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import validation from "./validation";
 import { useDispatch, useSelector } from "react-redux";
 import { createActivity } from "../../redux/actions/actions";
@@ -15,8 +15,6 @@ const Activities = () => {
     CountryID: [],
   });
 
-  const [difficultyData, setDifficultyData] = useState("");
-  const [seasonData, setSeasonData] = useState("");
   const countries = useSelector((state) => state.countries);
 
   const [errors, setErrors] = useState({});
@@ -31,64 +29,53 @@ const Activities = () => {
       );
       setActivityData({
         ...activityData,
-        CountryID: [...activityData.CountryID, selectedCountries],
+        CountryID: [...activityData.CountryID, ...selectedCountries],
       });
     } else {
       setActivityData({
         ...activityData,
         [name]: value,
       });
-      if (option === "difficulty") {
-        setDifficultyData(value);
-      } else if (option === "season") {
-        setSeasonData(value);
-      }
     }
   };
 
-  const handleRemoveCountry = (countryID) => {
+  const handleRemoveCountry = useCallback((countryID) => {
     const updatedCountries = activityData.CountryID.filter(
       (ID) => ID !== countryID
     );
-    return () => {
-      setActivityData({
-        ...activityData,
-        CountryID: updatedCountries,
-      });
-    };
-  };
+    setActivityData({
+      ...activityData,
+      CountryID: updatedCountries,
+    });
+  }, [activityData]);
 
   useEffect(() => {
     setErrors(validation(activityData));
   }, [activityData]);
 
   const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
-    setActivityData({
-      ...activityData,
-      difficulty: difficultyData,
-      season: seasonData,
-    });
     if (
       activityData.name !== "" &&
       activityData.difficulty !== "" &&
       activityData.duration !== "" &&
       activityData.season !== "" &&
       activityData.CountryID.length !== 0
-      ) {
-        dispatch(createActivity(activityData));
-        alert("Activity created SUCCESSFULLY");
-        setActivityData({
-          name: "",
-          difficulty: "",
-          duration: "",
-          season: "",
-          CountryID: [],
-        });
-      } else {
-        alert("Complete all areas");
-        event.preventDefault();
-      } 
+    ) {
+      dispatch(createActivity(activityData));
+      alert("Activity created SUCCESSFULLY");
+      setActivityData({
+        name: "",
+        difficulty: "",
+        duration: "",
+        season: "",
+        CountryID: [],
+      });
+    } else {
+      alert("Complete all areas");
+      event.preventDefault();
+    }
   };
 
   return (
@@ -117,7 +104,7 @@ const Activities = () => {
           className={style.select}
           name="difficulty"
           id="difficulty"
-          value={difficultyData}
+          value={activityData.difficulty}
           onChange={(event) => handleChange(event, "difficulty")}
         >
           <option value="" defaultValue={1}>
@@ -147,7 +134,7 @@ const Activities = () => {
           className={style.select}
           name="season"
           id="season"
-          value={seasonData}
+          value={activityData.season}
           onChange={(event) => handleChange(event, "season")}
         >
           <option value="" defaultValue={"Summer"}>
@@ -166,9 +153,9 @@ const Activities = () => {
           id="CountryID"
           onChange={(event) => handleChange(event, "country")}
         >
-          {countries.map((country) => (
-            <option key={country.ID} value={country.ID}>
-              {country.name}
+          {countries.map(({ ID, name }) => (
+            <option key={ID} value={ID}>
+              {name}
             </option>
           ))}
         </select>
@@ -177,7 +164,7 @@ const Activities = () => {
           <div key={country} className={style.countriesAdded}>
             <input
               type="checkbox"
-              onClick={handleRemoveCountry(country)}
+              onClick={() => handleRemoveCountry(country)}
               className={style.checkbox}
             />
             <p>{country}</p>
@@ -186,7 +173,7 @@ const Activities = () => {
 
         <button type="submit">Submit</button>
       </form>
-      <AllActivities/>
+      <AllActivities />
     </div>
   );
 };
