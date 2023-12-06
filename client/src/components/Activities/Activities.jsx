@@ -63,15 +63,20 @@ const Activities = () => {
       activityData.season !== "" &&
       activityData.CountryID.length !== 0
     ) {
-      dispatch(createActivity(activityData));
-      alert("Activity created SUCCESSFULLY");
-      setActivityData({
-        name: "",
-        difficulty: "",
-        duration: "",
-        season: "",
-        CountryID: [],
-      });
+      if(errors.name === "" && errors.duration === ""){
+        dispatch(createActivity(activityData));
+        alert("Activity created SUCCESSFULLY");
+        setActivityData({
+          name: "",
+          difficulty: "",
+          duration: "",
+          season: "",
+          CountryID: [],
+        });
+      } else {
+        alert("Cannot submit, check for errors")
+        event.preventDefault();
+      } 
     } else {
       alert("Complete all areas");
       event.preventDefault();
