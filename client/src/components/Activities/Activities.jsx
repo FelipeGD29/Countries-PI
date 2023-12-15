@@ -15,7 +15,7 @@ const Activities = () => {
     CountryID: [],
   });
 
-  const countries = useSelector((state) => state.countries);
+  const allCountries = useSelector((state) => state.allCountries);
 
   const [errors, setErrors] = useState({});
 
@@ -63,7 +63,6 @@ const Activities = () => {
       activityData.season !== "" &&
       activityData.CountryID.length !== 0
     ) {
-      if(errors.name === "" && errors.duration === ""){
         dispatch(createActivity(activityData));
         alert("Activity created SUCCESSFULLY");
         setActivityData({
@@ -73,10 +72,6 @@ const Activities = () => {
           season: "",
           CountryID: [],
         });
-      } else {
-        alert("Cannot submit, check for errors")
-        event.preventDefault();
-      } 
     } else {
       alert("Complete all areas");
       event.preventDefault();
@@ -158,7 +153,7 @@ const Activities = () => {
           id="CountryID"
           onChange={(event) => handleChange(event, "country")}
         >
-          {countries.map(({ ID, name }) => (
+          {allCountries.map(({ ID, name }) => (
             <option key={ID} value={ID}>
               {name}
             </option>

@@ -8,6 +8,7 @@ import {
   ORDER_ALPHABETICALLY,
   ORDER_POPULATION,
   FILTER_CONTINENT,
+  ORDER_DURATION,
 } from "./action-types";
 
 export const getCountries = () => {
@@ -88,4 +89,11 @@ export const filterContinent = (contient) => {
     payload: contient,
   };
 };
+
+export const orderDuration = (order) => {
+  return {
+    type: ORDER_DURATION,
+    payload: order,
+  }
+}
 
