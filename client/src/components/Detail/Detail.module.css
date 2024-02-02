@@ -1,9 +1,9 @@
-.container{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("https://nerdymindsmagazine.files.wordpress.com/2015/09/yakkosworldatnerdymindsmagazine.gif");
-    background-size:cover;
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(22deg, #000046 0%, #1cb5e0 100%);
+  background-size: cover;
 }
