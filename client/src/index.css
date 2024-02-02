@@ -29,20 +29,20 @@ button:hover {
 */
 body {
   font-family: "Quicksand", sans-serif;
-  color: white
+  color: white;
 }
 
 a {
-  text-decoration: none; 
-  color: inherit; 
+  text-decoration: none;
+  color: inherit;
 }
 
 button {
   margin: 5px;
   color: white;
   border-radius: 50px;
-  border: 1px solid transparent;
-  width:126px;
+  border: none;
+  width: 126px;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -59,33 +59,33 @@ button:hover {
 }
 
 img {
-  width:300px;
-  height:213px;
+  width: 300px;
+  height: 213px;
 }
 
-#root a ._text_gwn0a_37{
-  width:278px;
+#root a ._text_gwn0a_37 {
+  width: 278px;
   color: white;
 }
 
-#root ._container_18xk7_1 a > ._text_18xk7_37{
-  width:192px;
-  transform:translatex(47px) translatey(21px);
+#root ._container_18xk7_1 a > ._text_18xk7_37 {
+  width: 192px;
+  transform: translatex(47px) translatey(21px);
 }
-h2{
-  color:#ffffff;
-  text-shadow:none;
+h2 {
+  color: #ffffff;
+  text-shadow: none;
 }
 
 /* Heading */
-h3{
-  color:#ffffff;
+h3 {
+  color: #ffffff;
 }
 
 label {
-  color:#ffffff;
+  color: #ffffff;
 }
 
- input {
-  color:#ffffff;
+input {
+  color: #ffffff;
 }

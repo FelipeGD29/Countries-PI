@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import style from "./SearchBar.module.css";
 
-const SearchBar = ({firstPage}) => {
+const SearchBar = ({ firstPage }) => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const SearchBar = ({firstPage}) => {
   };
 
   const onSearch = () => {
-    dispatch(getName(name));
+    name !== "" && dispatch(getName(name));
   };
 
   const showAllCountries = () => {
@@ -39,21 +39,21 @@ const SearchBar = ({firstPage}) => {
   const handleOrder = (event) => {
     if (event.target.name === "orderAlphabetically") {
       dispatch(orderAlphabetically(event.target.value));
-      return firstPage()
+      return firstPage();
     }
     if (event.target.name === "orderPopulation") {
       dispatch(orderPopulation(event.target.value));
-      return firstPage()
+      return firstPage();
     }
   };
 
   const handleContinent = (event) => {
     if (event.target.value === "All") {
       dispatch(getCountries());
-      return firstPage()
+      return firstPage();
     }
     dispatch(filterContinent(event.target.value));
-    return firstPage()
+    return firstPage();
   };
 
   return (
