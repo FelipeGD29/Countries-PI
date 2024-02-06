@@ -1,7 +1,13 @@
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
 # **COUNTRIES** | Proyecto Individual
+Mi proyecto individual: una aplicación de países que ofrece información de 250 destinos, y podremos crear actividades para estos.
 
+Al ingresar, la página de bienvenida nos guía a la principal, donde encontramos tarjetas de todos los países. Al hacer clic, obtenemos datos clave como ID, bandera, continente, capital, subregión, área y población. Próximamente, las actividades creadas se mostrarán aquí.
+
+De vuelta a la página principal, encontramos filtros permiten ordenar países alfabéticamente, por población o continente, utilizables simultáneamente. En la sección de actividades, creamos y gestionamos nuestras propias actividades, ingresando detalles como nombre, dificultad, duración, países involucrados y temporada.
+
+La aplicación verifica la precisión de la información antes de crear la actividad. Una vez creada, se muestra claramente y se integra en la carta del país correspondiente.
 ## **📌 OBJETIVOS**
 
 -  Construir una Single Page Application utlizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**.
